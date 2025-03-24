@@ -14,7 +14,7 @@ const Inicio = () => {
                     personalizado.</p></div>
 
             <div>
-                <img src="../../public/photo2.png" alt="imagen" className="img-fluid col md-5" />
+                <img src="/photo2.png" alt="imagen de psi" className="img-fluid col md-5" />
             </div>
         </div>
     </>

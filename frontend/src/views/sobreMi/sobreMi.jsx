@@ -24,7 +24,7 @@ const SobreMi = () => {
                     </div>
 
                     <div className='col md-6 justify-content-center align-items-center'>
-                        <img src="../../public/photo2.png" alt="imagen de psi" className="img-fluid col md-5" />
+                        <img src="photo2.png" alt="imagen de psi" className="img-fluid col md-5" />
                     </div>
 
                 </div>
