@@ -5,7 +5,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const SobreMi = () => {
     return (
         <>
-            <div className='bg-light pt-5 mt-5 d-flex'>
+
+            <div className='bg-light pt-5 mt-5 container d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-lg-start'>
                 <div className='row  m-4 '>
                     <div className='col md-3 '>
                         <h2>Sobre mi</h2>
@@ -23,7 +24,7 @@ const SobreMi = () => {
                         </p>
                     </div>
 
-                    <div className='col md-6 justify-content-center align-items-center'>
+                    <div className="col-md-5 mt-4 mt-lg-0 d-flex align-items-center">
                         <img src="photo2.png" alt="imagen de psi" className="img-fluid col md-5" />
                     </div>
 
