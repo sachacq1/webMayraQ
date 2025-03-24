@@ -1,7 +1,8 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, or } from "sequelize";
 import { sequelize } from "../config/database.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { Op } from "sequelize";
 
 process.loadEnvFile();
 
@@ -34,9 +35,14 @@ const User = sequelize.define('user', {
     });
 
 const register = async ({ username, email, password }) => {
-    const existingUser = await User.findOne({ where: { username } })
+    const existingUser = await User.findOne({
+        where: {
+            [Op.or]: [{ username }, { email }] // Verifica ambos campos
+        }
+    });
     if (existingUser) {
-        return { error: 'Username already exists' }
+        return { error: 'El usuario ya existe' }
+
     }
     //encriptar contraseña
     const salt = await bcrypt.genSalt(10);
@@ -47,7 +53,7 @@ const register = async ({ username, email, password }) => {
 
     const newUser = await User.create({ username, email, password: hashedPass });
 
-    return newUser
+    return (newUser)
 }
 
 const login = async (username, password) => {

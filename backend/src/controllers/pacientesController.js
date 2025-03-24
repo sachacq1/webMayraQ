@@ -11,18 +11,17 @@ const getAllPacientes = async (req, res) => {
 
 const addPaciente = async (req, res) => {
     try {
-        const { name, lastName, email, phone, address, info } = req.body;
+        const { name, lastName, dni, email, phone, address, info } = req.body;
 
-        // Validación de la existencia de un paciente con el mismo email (o cualquier otro campo único que quieras validar)
-        const existingPaciente = await Pacientes.getByEmail(email); // Necesitarías definir este método en tu modelo.
+        const existingPaciente = await Pacientes.getByDniPaciente(dni);
         if (existingPaciente) {
-            return res.status(400).json({ error: "Ya existe un paciente con ese email" });
+            return res.status(400).json({ error: "Ya existe un paciente con ese dni" });
         }
-
-        const newPaciente = await Pacientes.addPaciente({ name, lastName, email, phone, address, info });
-        res.status(201).json(newPaciente); // Usamos 201 ya que es un recurso creado
+        const newPaciente = await Pacientes.addPaciente({ name, lastName, dni, email, phone, address, info });
+        res.status(201).json(newPaciente);
     } catch (error) {
         res.status(500).json({ error: "Error al agregar el paciente" });
+        console.log(error)
     }
 };
 
@@ -40,7 +39,7 @@ const getById = async (req, res) => {
 
 const updatePaciente = async (req, res) => {
     try {
-        const { name, lastName, email, phone, address, info } = req.body;
+        const { name, lastName, dni, email, phone, address, info } = req.body;
 
         // Verificar si el paciente existe
         const pacienteExistente = await Pacientes.getByIdPaciente(req.params.id);
@@ -49,9 +48,10 @@ const updatePaciente = async (req, res) => {
         }
 
         const updatedPaciente = await Pacientes.updatePaciente(req.params.id, { name, lastName, email, phone, address, info });
-        res.status(200).json(updatedPaciente);
+        res.status(200).json({ message: "Paciente actualizado con éxito" });
     } catch (error) {
         res.status(500).json({ error: "Error al actualizar el paciente" });
+        console.log(error)
     }
 };
 

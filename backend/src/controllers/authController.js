@@ -5,8 +5,8 @@ const register = async (req, res) => {
 
         const { username, password, email } = req.body;
         const newUser = await User.register({ username, password, email })
-        if (!newUser) {
-            return res.status(400).json({ error: "El usuario ya existe" })
+        if (newUser.error) {
+            return res.status(400).json({ error: newUser.error });
         }
 
         res.status(200).json({ "message": "Usuario creado exitosamente" })

@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/mysqlConnection.js";
+import { sequelize } from "../config/database.js";
 
 // Modelo Paciente
 const Paciente = sequelize.define("pacientes", {
@@ -9,7 +9,12 @@ const Paciente = sequelize.define("pacientes", {
         validate: {
             notEmpty: { msg: 'El nombre es requerido' },
             len: { args: [3], msg: 'El nombre debe tener al menos 3 caracteres' } // CORRECCIÓN: Cambié `length` por `len`
-        }
+        },
+    },
+    dni: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     lastName: {
         type: DataTypes.STRING,
@@ -37,7 +42,14 @@ const Paciente = sequelize.define("pacientes", {
     info: {
         type: DataTypes.STRING,
     },
-});
+}, {
+
+    timestamps: true,
+    createdAt: 'created_at',  // Usar el nombre de columna de MySQL
+    updatedAt: 'updated_at',  // Usar el nombre de columna de MySQL
+    tableName: 'pacientes'
+}
+);
 
 // CRUD
 
@@ -54,13 +66,20 @@ const getAllPacientes = async () => {
 // Agregar un paciente
 const addPaciente = async (paciente) => {
     try {
+        // Verificar si el paciente con ese email ya existe
+        const existingPaciente = await Paciente.findOne({ where: { email: paciente.email } });
+        if (existingPaciente) {
+            throw new Error("Ya existe un paciente con ese email");
+        }
         const newPaciente = await Paciente.create(paciente);
         return newPaciente;
+
     } catch (error) {
         console.error("Error al agregar el paciente:", error);
         throw new Error("No se pudo agregar el paciente");
     }
 };
+
 
 // Obtener un paciente por ID
 const getByIdPaciente = async (id) => {
@@ -72,6 +91,17 @@ const getByIdPaciente = async (id) => {
         throw new Error("No se pudo encontrar el paciente");
     }
 };
+
+const getByDniPaciente = async (dni) => {
+    try {
+        const paciente = await Paciente.findOne({ where: { dni: dni } });
+        return paciente;
+    } catch (error) {
+        console.error(`Error al obtener el paciente con email ${dni}:`, error);
+        throw new Error("No se pudo encontrar el paciente");
+    }
+}
+
 
 // Actualizar un paciente
 const updatePaciente = async (id, paciente) => {
@@ -101,4 +131,4 @@ const deletePaciente = async (id) => {
     }
 };
 
-export default { getAllPacientes, addPaciente, getByIdPaciente, updatePaciente, deletePaciente };
+export default { getAllPacientes, addPaciente, getByIdPaciente, updatePaciente, deletePaciente, getByDniPaciente };

@@ -5,7 +5,7 @@ import { Sequelize } from "sequelize";
 
 
 
-const sequelize = new Sequelize("mayraqDB", "root", "", {
+const sequelize = new Sequelize("mayrawebdb", "root", "", {
     host: "localhost",
     dialect: "mysql"
 });
