@@ -69,14 +69,15 @@ const login = async (username, password) => {
         return null
     }
 
-    const paloyd = {
+    const payload = {
         id: existingUser.id,
     }
     //generar JWT
     const JWT_SECRET = process.env.JWT_SECRET;
-    const token = jwt.sign(paloyd, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
     return { user: existingUser, token }
 }
 
 
 export default { User, register, login }
+export { User }
