@@ -1,3 +1,4 @@
 [service]
-build = "cd backend && npm install"
-start = "cd backend && npm start"
+root = "backend"
+build = "npm install"
+start = "npm start"
