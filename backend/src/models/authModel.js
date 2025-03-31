@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
 
-process.loadEnvFile();
+// process.loadEnvFile();
 
 const User = sequelize.define('user', {
     username: {
