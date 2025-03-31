@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
 
 // process.loadEnvFile();
-const DB = process.env.DB || "mayrawebdb";
-const MYSQL_USER = process.env.MYSQL_USER || "root";
-const PASSWORD = process.env.PASSWORD || "";
-const HOST = process.env.HOST || "localhost";
+const MYSQL_DATABASE = process.env.DB || "mayrawebdb";
+const MYSQL_USER = process.env.MYSQL_USER || "mayraDB_web";
+const MYSQL_PASSWORD = process.env.PASSWORD || "";
+const MYSQL_HOST = process.env.HOST || "localhost";
 
 
 const sequelize = new Sequelize(DB, MYSQL_USER, PASSWORD, {
