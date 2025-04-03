@@ -14,7 +14,8 @@ const sequelize = new Sequelize(MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, {
     logging: false,
     dialectOptions: {
         connectTimeout: 60000, // ⏳ Espera hasta 60 segundos antes de fallar
-    });
+    }
+});
 
 const connectDb = async () => {
     try {
