@@ -7,10 +7,14 @@ const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "";
 const MYSQL_HOST = process.env.MYSQL_HOST;
 
 
-const sequelize = new Sequelize(MYSQL_DATABASE, MYSQL_USER, "", {
-    host: MYSQL_HOST,
-    dialect: "mysql"
-});
+const sequelize = new Sequelize(MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, {
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    dialect: 'mysql',
+    logging: false,
+    dialectOptions: {
+        connectTimeout: 60000, // ⏳ Espera hasta 60 segundos antes de fallar
+    });
 
 const connectDb = async () => {
     try {
