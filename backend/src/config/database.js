@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-process.loadEnvFile();
+// process.loadEnvFile();
 const MYSQL_DATABASE = process.env.MYSQL_DATABASE || "mayrawebdb";
 const MYSQL_USER = process.env.MYSQL_USER || "mayraDB_web";
 const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "";
