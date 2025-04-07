@@ -1,82 +1,58 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../config/database.js";
+import mongoose from "mongoose";
 
 // Modelo Paciente
-const Paciente = sequelize.define("pacientes", {
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'El nombre es requerido' },
-            len: { args: [3], msg: 'El nombre debe tener al menos 3 caracteres' } // CORRECCIÓN: Cambié `length` por `len`
-        },
+const PacienteSchema = new mongoose.Schema({
+
+    nombre: {
+        type: String,
+        required: true
+    },
+    apellido: {
+        type: String,
+        required: true
     },
     dni: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'El apellido es requerido' },
-            len: { args: [3], msg: 'El apellido debe tener al menos 3 caracteres' } // CORRECCIÓN: Cambié `length` por `len`
-        }
+        type: String,
+        required: true
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            notEmpty: { msg: 'El email es requerido' },
-            isEmail: { msg: 'El email debe ser válido' }
-        },
+        type: String,
+        required: true
     },
-    phone: {
-        type: DataTypes.STRING,
+    telefono: {
+        type: String,
+        required: true
     },
-    address: {
-        type: DataTypes.STRING,
+    fechaNacimiento: {
+        type: Date,
+        required: true
     },
-    info: {
-        type: DataTypes.STRING,
-    },
-}, {
+},
+    {
+        versionKey: false
+    })
 
-    timestamps: true,
-    createdAt: 'created_at',  // Usar el nombre de columna de MySQL
-    updatedAt: 'updated_at',  // Usar el nombre de columna de MySQL
-    tableName: 'pacientes'
-}
-);
-
+const Paciente = mongoose.model("Paciente", PacienteSchema);
 // CRUD
 
 // Obtener todos los pacientes
 const getAllPacientes = async () => {
     try {
-        return await Paciente.findAll();
+        const pacientes = await Paciente.findAll();
+        return pacientes;
     } catch (error) {
-        console.error("Error al obtener los pacientes:", error);
-        throw new Error("No se pudieron obtener los pacientes");
+        throw new Error("Error al obtener los pacientes");
     }
 };
 
 // Agregar un paciente
 const addPaciente = async (paciente) => {
     try {
-        // Verificar si el paciente con ese email ya existe
-        const existingPaciente = await Paciente.findOne({ where: { email: paciente.email } });
-        if (existingPaciente) {
-            throw new Error("Ya existe un paciente con ese email");
-        }
-        const newPaciente = await Paciente.create(paciente);
+        const newPaciente = new Paciente(paciente);
+        await newPaciente.save();
         return newPaciente;
-
     } catch (error) {
-        console.error("Error al agregar el paciente:", error);
-        throw new Error("No se pudo agregar el paciente");
+        throw new Error("Error al agregar el paciente" + error.message);
     }
 };
 
@@ -84,17 +60,16 @@ const addPaciente = async (paciente) => {
 // Obtener un paciente por ID
 const getByIdPaciente = async (id) => {
     try {
-        const paciente = await Paciente.findByPk(id);
+        const paciente = await Paciente.findById(id);
         return paciente;
     } catch (error) {
-        console.error(`Error al obtener el paciente con id ${id}:`, error);
-        throw new Error("No se pudo encontrar el paciente");
+        throw new Error("Error al obtener el paciente" + error.message);
     }
 };
 
 const getByDniPaciente = async (dni) => {
     try {
-        const paciente = await Paciente.findOne({ where: { dni: dni } });
+        const paciente = await Paciente.findOne(dni);
         return paciente;
     } catch (error) {
         console.error(`Error al obtener el paciente con email ${dni}:`, error);
@@ -106,28 +81,21 @@ const getByDniPaciente = async (dni) => {
 // Actualizar un paciente
 const updatePaciente = async (id, paciente) => {
     try {
-        const [updatedCount] = await Paciente.update(paciente, { where: { id } });
-        if (updatedCount === 0) {
-            throw new Error(`Paciente con id ${id} no encontrado`);
-        }
-        return updatedCount;
+        const updatedPaciente = await Paciente.update(id, paciente, { new: true });
+        return updatedPaciente
     } catch (error) {
-        console.error(`Error al actualizar el paciente con id ${id}:`, error);
-        throw new Error("No se pudo actualizar el paciente");
+        throw new Error("Error al actualizar el paciente" + error.message);
     }
-};
-
+}
 // Eliminar un paciente
 const deletePaciente = async (id) => {
     try {
-        const deletedCount = await Paciente.destroy({ where: { id } });
-        if (deletedCount === 0) {
-            throw new Error(`Paciente con id ${id} no encontrado`);
-        }
-        return deletedCount;
+        const deletePaciente = await Paciente.delete(id);
+        if (!deletePaciente) throw new Error("No se pudo eliminar el paciente")
+        return deletePaciente
     } catch (error) {
-        console.error(`Error al eliminar el paciente con id ${id}:`, error);
-        throw new Error("No se pudo eliminar el paciente");
+        throw new Error("Error al eliminar el paciente" + error.message);
+
     }
 };
 

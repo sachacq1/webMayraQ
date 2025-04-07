@@ -5,7 +5,7 @@ const getAllPacientes = async (req, res) => {
         const pacientes = await Pacientes.getAllPacientes();
         res.status(200).json(pacientes); // Código 200 está bien para obtener los recursos
     } catch (error) {
-        res.status(500).json({ error: "Error al obtener los pacientes" });
+        res.status(500).json({ error: "Error al obtener los pacientes" })
     }
 };
 

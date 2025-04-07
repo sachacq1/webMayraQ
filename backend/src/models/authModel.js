@@ -1,83 +1,90 @@
-import { DataTypes, or } from "sequelize";
-import { sequelize } from "../config/database.js";
+import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { Op } from "sequelize";
 
 // process.loadEnvFile();
+const JWT_SECRET = process.env.JWT_SECRET;
 
-const User = sequelize.define('user', {
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    role: {
-        type: DataTypes.ENUM('admin', 'user'),
-        defaultValue: 'user'
-    },
-},
+const userSchema = new mongoose.Schema(
     {
-
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+            minlength: [8, "La contraseña debe tener al menos 8 caracteres"],
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            match: [/\S+@\S+\.\S+/, "Por favor ingresa un correo electrónico válido"],
+        },
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
+        },
+    },
+    {
         timestamps: true,
-        createdAt: 'created_at',  // Usar el nombre de columna de MySQL
-        updatedAt: 'updated_at',  // Usar el nombre de columna de MySQL
-        tableName: 'users'
-    });
+        versionKey: false,
+    }
+);
 
-const register = async ({ username, email, password }) => {
-    const existingUser = await User.findOne({
-        where: {
-            [Op.or]: [{ username }, { email }] // Verifica ambos campos
+const User = mongoose.model("User", userSchema);
+
+const register = async (data) => {
+    try {
+        const existingUser = await User.findOne({ username: data.username });
+        if (existingUser) {
+            return null;
         }
-    });
-    if (existingUser) {
-        return { error: 'El usuario ya existe' }
 
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+
+        const newUser = new User({
+            username: data.username,
+            password: hashedPassword,
+            email: data.email,
+            role: data.role || "user",
+        });
+
+        await newUser.save();
+        return newUser;
+
+    } catch (error) {
+        throw new Error("Error al registrar usuario: " + error.message);
     }
-    //encriptar contraseña
-    const salt = await bcrypt.genSalt(10);
-    const hashedPass = await bcrypt.hash(password, salt);
+};
 
-    // Verifica que los datos sean correctos antes de crear
-    console.log("Datos para crear el usuario:", { username, email, password: hashedPass });
+const login = async (data) => {
+    try {
+        const user = await User.findOne({ username: data.username });
+        if (!user) {
+            throw new Error("Usuario no encontrado");
+        }
 
-    const newUser = await User.create({ username, email, password: hashedPass });
+        const matchPassword = await bcrypt.compare(data.password, user.password);
+        if (!matchPassword) {
+            throw new Error("Contraseña o usuario incorrecto");
+        }
 
-    return (newUser)
-}
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            JWT_SECRET,
+            { expiresIn: "1h" }
+        );
 
-const login = async (username, password) => {
+        return token;
 
-    const existingUser = await User.findOne({ where: { username } })
-    if (!existingUser) {
-        return null
+    } catch (error) {
+        throw new Error("Error al iniciar sesión: " + error.message);
     }
-    console.log(existingUser.password);
+};
 
-    const itsMatch = await bcrypt.compare(password, existingUser.password);
-    if (!itsMatch) {
-        return null
-    }
-
-    const payload = {
-        id: existingUser.id,
-    }
-    //generar JWT
-    const JWT_SECRET = process.env.JWT_SECRET;
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
-    return { user: existingUser, token }
-}
-
-
-export default { User, register, login }
-export { User }
+export { register, login };
+export default { User };

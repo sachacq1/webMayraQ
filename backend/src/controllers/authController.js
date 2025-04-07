@@ -1,37 +1,44 @@
-import User from "../models/authModel.js";
+import { register, login } from "../models/authModel.js";
+import jwt from "jsonwebtoken";
 
-const register = async (req, res) => {
+const Register = async (req, res) => {
     try {
+        const { username, password, email, role } = req.body;
+        const data = { username, password, email, role };
 
-        const { username, password, email } = req.body;
-        const newUser = await User.register({ username, password, email })
-        if (newUser.error) {
-            return res.status(400).json({ error: newUser.error });
+        const user = await register(data);
+
+        if (user === null) {
+            return res.status(400).json({ error: "El usuario ya está registrado" });
         }
 
-        res.status(200).json({ "message": "Usuario creado exitosamente" })
-    }
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
 
-    catch (error) {
-        console.log(error)
-        res.status(500).json({ error: "Error al crear el usuario" })
+        return res.status(201).json({ message: "Usuario registrado con éxito", user, token });
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
 
-const login = async (req, res) => {
+const Login = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await User.login(username, password);
-
-        if (!user) {
-            return res.status(400).json({ error: "Nombre de usuario o contraseña incorrectos" })
+        if (!username || !password) {
+            return res.status(400).json({ error: "Todos los campos son obligatorios" });
         }
-        res.status(200).json({ "message": "Login exitoso", "token": user.token })
-    } catch (error) {
-        console.log(error.message)
-        res.status(500).json({ error: "Error interno en el servidor" })
 
+        const token = await login({ username, password });
+        return res.json({ token });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ error: error.message });
     }
 };
 
-export { register, login }
+export { Register, Login };
