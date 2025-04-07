@@ -7,7 +7,7 @@ import helmet from "helmet"
 import cors from "cors"
 
 
-process.loadEnvFile();
+//process.loadEnvFile();
 const PORT = process.env.PORT || 3000;
 
 const app = express();
