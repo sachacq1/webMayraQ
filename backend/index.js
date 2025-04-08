@@ -24,11 +24,12 @@ app.use(cors(
 
 
 app.use("/auth", authRoutes)
+app.use(auth)
 app.use("/api/pacientes", pacientesRoutes)
 app.use("/*", (req, res) => {
     res.status(404).json({ error: "Ruta no encontrada" });
 })
-app.use(auth)
+
 
 
 connectDb().then(() => {
