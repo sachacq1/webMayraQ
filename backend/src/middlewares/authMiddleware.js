@@ -27,7 +27,7 @@ const isadmin = async (req, res, next) => {
             return res.status(401).json({ error: "Acceso no autorizado. Usuario no autenticado." });
         }
 
-        const user = await User.findByPk(req.user.id);
+        const user = await User.findById(req.user.id);
 
         if (!user || user.role !== "admin") {
             return res.status(403).json({ error: "Acceso no autorizado. Se requiere rol de administrador." });

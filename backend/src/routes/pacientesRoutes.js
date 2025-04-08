@@ -5,9 +5,6 @@ import { auth, isadmin } from "../middlewares/authMiddleware.js";
 const pacientesRoutes = Router();
 
 
-// Rutas publicas
-pacientesRoutes.get("/", getAllPacientes);
-
 // Rutas privadas
 pacientesRoutes.use(auth)
 
