@@ -19,7 +19,7 @@ const getAllPacientes = async () => {
 
 const addPaciente = async (newPaciente) => {
     try {
-        const response = await apiPacientes.post("/apipacientes/admin", newPaciente);
+        const response = await apiPacientes.post("/api/pacientes/admin", newPaciente);
         alert("Paciente agregado con exito")
     } catch (error) {
         console.log("error al crear paciente", error);
