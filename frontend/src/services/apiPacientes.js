@@ -2,6 +2,7 @@ import axios from "axios";
 
 const apiPacientes = axios.create({
     baseURL: "https://webmayraq.onrender.com",
+    withCredentials: true
 });
 
 apiPacientes.interceptors.request.use((config) => {

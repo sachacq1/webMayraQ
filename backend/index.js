@@ -18,7 +18,8 @@ app.use(cors(
     {
         origin: "https://web-mayra-q.vercel.app",
         methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"]
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true
     }
 ))
 
