@@ -10,10 +10,6 @@ import cors from "cors"
 //process.loadEnvFile();
 const PORT = process.env.PORT || 3000;
 
-
-const app = express();
-app.use(express.json());
-app.use(helmet());
 app.use(cors(
     {
         origin: "https://web-mayra-q.vercel.app",
@@ -22,6 +18,11 @@ app.use(cors(
         credentials: true
     }
 ))
+
+const app = express();
+app.use(express.json());
+app.use(helmet());
+
 
 
 app.use("/auth", authRoutes)
