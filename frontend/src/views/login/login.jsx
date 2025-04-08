@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
 
 const Login = () => {
-    const [username, setUsername] = useState(""); // Cambiado de email a username
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await loginUser(username, password); // Enviamos username
+            const response = await loginUser(username, password);
             if (response.token) {
                 login(response.token);
                 navigate("/");

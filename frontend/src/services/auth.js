@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const loginUser = async (email, password) => {
+const loginUser = async (username, password) => {
     try {
         const response = await axios.post("https://webmayraq.onrender.com/auth/login", {
             username,
             password
         });
-        return response.data; // importante retornar los datos
+        return response.data;
     } catch (error) {
         throw new Error("Credenciales incorrectas");
     }
