@@ -3,7 +3,7 @@ import axios from "axios";
 const loginUser = async (email, password) => {
     try {
         const response = await axios.post("https://webmayraq.onrender.com/auth/login", {
-            email,
+            username,
             password
         });
         return response.data; // importante retornar los datos

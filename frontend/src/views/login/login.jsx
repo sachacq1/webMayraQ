@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState(""); // Cambiado de email a username
     const [password, setPassword] = useState("");
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await loginUser(email, password);
+            const response = await loginUser(username, password); // Enviamos username
             if (response.token) {
                 login(response.token);
                 navigate("/");
@@ -34,13 +34,13 @@ const Login = () => {
                     <div className="card p-4 shadow">
                         <form onSubmit={handleLogin}>
                             <div className="mb-3">
-                                <label className="form-label">Email</label>
+                                <label className="form-label">Usuario</label>
                                 <input
-                                    type="email"
+                                    type="text"
                                     className="form-control"
-                                    placeholder="Email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Nombre de usuario"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)} // Manejamos username
                                     required
                                 />
                             </div>
