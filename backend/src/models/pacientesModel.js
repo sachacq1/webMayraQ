@@ -14,7 +14,7 @@ const PacienteSchema = new mongoose.Schema({
     dni: {
         type: String,
         required: true,
-        unique
+        unique: true
     },
     email: {
         type: String,
