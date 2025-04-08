@@ -41,14 +41,16 @@ const Paciente = mongoose.model("Paciente", PacienteSchema);
 // CRUD
 
 // Obtener todos los pacientes
-const getAllPacientes = async () => {
+export const getAllPacientes = async (req, res) => {
     try {
         const pacientes = await Paciente.find();
-        return pacientes;
+        res.json(pacientes);
     } catch (error) {
-        throw new Error("Error al obtener los pacientes");
+        console.error("Error en getAllPacientes:", error);
+        res.status(500).json({ error: "Error al obtener pacientes" });
     }
 };
+
 
 const addPaciente = async (paciente) => {
     try {
