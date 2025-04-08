@@ -2,7 +2,7 @@ import axios from "axios";
 
 const loginUser = async (email, password) => {
     try {
-        const response = await axios.post("https://webmayraq.onrender.com/users/login", {
+        const response = await axios.post("https://webmayraq.onrender.com/auth/login", {
             email,
             password
         });
@@ -14,7 +14,7 @@ const loginUser = async (email, password) => {
 
 const registerUser = async (username, email, password) => {
     try {
-        const response = await axios.post("https://webmayraq.onrender.com/users/register", {
+        const response = await axios.post("https://webmayraq.onrender.com/auth/register", {
             username,
             email,
             password
