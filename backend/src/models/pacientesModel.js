@@ -29,6 +29,9 @@ const PacienteSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    info: {
+        type: String,
+    },
 },
     {
         versionKey: false
