@@ -2,9 +2,14 @@ import axios from "axios";
 
 const apiPacientes = axios.create({
     baseURL: "https://webmayraq.onrender.com",
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+});
+
+apiPacientes.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
+    return config;
 });
 
 const getAllPacientes = async () => {
