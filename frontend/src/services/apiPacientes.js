@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiPacientes = axios.create({
-    baseURL: "https://webmayraq.onrender.com/api",
+    baseURL: "https://webmayraq.onrender.com",
     headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
     }
