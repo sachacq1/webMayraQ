@@ -23,11 +23,11 @@ const auth = async (req, res, next) => {
 // Verificar si el usuario es un administrador
 const isadmin = async (req, res, next) => {
     try {
-        if (!req.user || !req.user.id) {
+        if (!req.user || !req.user._id) {
             return res.status(401).json({ error: "Acceso no autorizado. Usuario no autenticado." });
         }
 
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
 
         if (!user || user.role !== "admin") {
             return res.status(403).json({ error: "Acceso no autorizado. Se requiere rol de administrador." });
