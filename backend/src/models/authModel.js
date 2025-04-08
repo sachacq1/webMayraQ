@@ -87,4 +87,4 @@ const login = async (data) => {
 };
 
 export { register, login };
-export default { User };
+export default User;
