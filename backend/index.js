@@ -10,12 +10,17 @@ import cors from "cors"
 //process.loadEnvFile();
 const PORT = process.env.PORT || 3000;
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://web-mayra-q.vercel.app"
+];
+
 const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(cors(
     {
-        origin: "https://web-mayra-q.vercel.app/",
+        origin: allowedOrigins,
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"]
     }
