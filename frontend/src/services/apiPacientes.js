@@ -9,7 +9,7 @@ const apiPacientes = axios.create({
 
 const getAllPacientes = async () => {
     try {
-        const response = await apiPacientes.get("/pacientes");
+        const response = await apiPacientes.get("/api/pacientes");
         return response.data
     } catch (error) {
         throw new Error(error.message)
@@ -19,7 +19,7 @@ const getAllPacientes = async () => {
 
 const addPaciente = async (newPaciente) => {
     try {
-        const response = await apiPacientes.post("/pacientes/admin", newPaciente);
+        const response = await apiPacientes.post("/apipacientes/admin", newPaciente);
         alert("Paciente agregado con exito")
     } catch (error) {
         console.log("error al crear paciente", error);
@@ -30,7 +30,7 @@ const addPaciente = async (newPaciente) => {
 
 const updatePaciente = async (id, paciente) => {
     try {
-        const response = await apiPacientes.put(`/pacientes/admin/${id}`, paciente);
+        const response = await apiPacientes.put(`/api/pacientes/admin/${id}`, paciente);
         alert("Paciente actualizado con exito")
         return response.data
 
@@ -42,7 +42,7 @@ const updatePaciente = async (id, paciente) => {
 
 const deletePaciente = async (id) => {
     try {
-        const response = await apiPacientes.delete(`/pacientes/admin/${id}`);
+        const response = await apiPacientes.delete(`/api/pacientes/admin/${id}`);
         return response.data
     } catch (error) {
         console.error("error al eliminar paciente", error);
@@ -52,7 +52,7 @@ const deletePaciente = async (id) => {
 
 const getById = async (id) => {
     try {
-        const response = await apiPacientes.get(`/pacientes/admin/${id}`);
+        const response = await apiPacientes.get(`/api/pacientes/admin/${id}`);
         return response.data
     } catch (error) {
         console.error("error al obtener paciente", error);
