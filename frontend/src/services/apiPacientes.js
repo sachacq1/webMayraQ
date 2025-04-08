@@ -9,7 +9,7 @@ const apiPacientes = axios.create({
 
 const getAllPacientes = async () => {
     try {
-        const response = await apiPacientes.get("/api/pacientes");
+        const response = await apiPacientes.get("/api/pacientes/admin");
         return response.data
     } catch (error) {
         throw new Error(error.message)
