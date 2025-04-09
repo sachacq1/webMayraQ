@@ -52,13 +52,13 @@ const Header = () => {
                             <Link className="nav-link" to="/panel">Inicio</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#servicios">Servicios</a>
+                            <Link className="nav-link" href="#servicios">Servicios</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#sobremi">Sobre mí</a>
+                            <Link className="nav-link" href="#sobremi">Sobre mí</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#contacto">Contacto</a>
+                            <Link className="nav-link" href="#contacto">Contacto</Link>
                         </li>
                     </ul>
 
