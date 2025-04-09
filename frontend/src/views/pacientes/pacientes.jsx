@@ -56,7 +56,7 @@ const PacienteDetalle = () => {
                 {paciente.info && (
                     <div className="mt-4">
                         <h5 className="fw-bold">Información Adicional</h5>
-                        <p>{paciente.info}</p>
+                        <p style={{ whiteSpace: "pre-line" }}>{paciente.info}</p>
                     </div>
                 )}
             </div>
