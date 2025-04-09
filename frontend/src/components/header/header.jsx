@@ -49,7 +49,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="#inicio">Inicio</a>
+                            <Link className="nav-link" to="/panel">Inicio</Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#servicios">Servicios</a>
@@ -61,6 +61,7 @@ const Header = () => {
                             <a className="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
+
 
                     {/* Botón o dropdown según login */}
                     {isAuthenticated ? (
