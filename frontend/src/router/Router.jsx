@@ -13,6 +13,7 @@ import Inicio from "../views/inicio/inicio.jsx";
 import Servicios from "../views/servicios/servicios.jsx";
 import SobreMi from "../views/sobreMi/sobreMi.jsx";
 import Contacto from "../views/contacto/contacto.jsx";
+import LayoutPublico from "../Layout/LayoutPublico.jsx";
 
 const AppRouter = () => {
     return (
@@ -20,12 +21,14 @@ const AppRouter = () => {
             <Header />
 
             <Routes>
-                {/* Rutas públicas accesibles siempre */}
-                <Route path="/" element={<Inicio />} />
-                <Route path="/inicio" element={<Inicio />} />
-                <Route path="/servicios" element={<Servicios />} />
-                <Route path="/sobremi" element={<SobreMi />} />
-                <Route path="/contacto" element={<Contacto />} />
+                {/* Layout general para todas las páginas públicas */}
+                <Route element={<LayoutPublico />}>
+                    <Route path="/" element={<Inicio />} />
+                    <Route path="/inicio" element={<Inicio />} />
+                    <Route path="/servicios" element={<Servicios />} />
+                    <Route path="/sobremi" element={<SobreMi />} />
+                    <Route path="/contacto" element={<Contacto />} />
+                </Route>
 
                 {/* Rutas de autenticación */}
                 <Route
