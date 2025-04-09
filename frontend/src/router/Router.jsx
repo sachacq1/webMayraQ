@@ -7,6 +7,9 @@ import PublicRoute from "../components/PublicRoute";
 import { PacienteDetalle } from "../views/pacientes/pacientes";
 import { Routes, Route } from "react-router-dom";
 import PacienteEditar from "../views/pacientes/pacienteEditar.jsx";
+import Login from "../views/login/login.jsx";
+import Register from "../views/register/register.jsx";
+
 
 
 const AppRouter = () => {
