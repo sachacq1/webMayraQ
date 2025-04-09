@@ -1,4 +1,4 @@
-import { Route, Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Inicio from "../views/inicio/inicio";
 import Servicios from "../views/servicios/servicios";
 import SobreMi from "../views/sobreMi/sobreMi";
@@ -9,20 +9,18 @@ import Footer from "./components/footer/footer.jsx";
 const App = () => {
 
   return (
-    <>
-      <Router>
-        <Header />
+    <Router>
+      <Header />
+      <Routes>
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/sobreMi" element={<SobreMi />} />
         <Route path="/contacto" element={<Contacto />} />
-        <Footer />
-      </Router>
-    </>
-
-  )
-
-}
-
+        <Route path="/" element={<Inicio />} /> {/* Ruta por defecto */}
+      </Routes>
+      <Footer />
+    </Router>
+  );
+};
 
 export default App;
