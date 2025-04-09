@@ -1,4 +1,4 @@
-import { getPacienteById } from "../../services/apiPacientes.js";
+import { getById } from "../../services/apiPacientes.js";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -24,7 +24,7 @@ const PacienteDetalle = () => {
 
     const fetchPaciente = async (id) => {
         try {
-            const data = await getPacienteById(id);
+            const data = await getById(id);
             setPaciente(data);
             setLoading(false);
         } catch (error) {
