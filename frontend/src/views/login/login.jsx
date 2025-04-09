@@ -16,7 +16,7 @@ const Login = () => {
             const response = await loginUser(username, password);
             if (response.token) {
                 login(response.token);
-                navigate("/");
+                navigate("/panel"); // ir al panel privado si querés
             } else {
                 alert("El login falló. Intenta de nuevo.");
             }
@@ -30,6 +30,13 @@ const Login = () => {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
+                    <button
+                        className="btn btn-outline-secondary  w-100 mb-2"
+                        onClick={() => navigate("/")}
+                    >
+                        ← Volver a la página principal
+                    </button>
+
                     <h1 className="text-center mb-4">Iniciar sesión</h1>
                     <div className="card p-4 shadow">
                         <form onSubmit={handleLogin}>
@@ -40,7 +47,7 @@ const Login = () => {
                                     className="form-control"
                                     placeholder="Nombre de usuario"
                                     value={username}
-                                    onChange={(e) => setUsername(e.target.value)} // Manejamos username
+                                    onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
                             </div>

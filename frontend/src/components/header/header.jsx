@@ -8,15 +8,18 @@ const Header = () => {
             <div className="container">
                 {/* Logo */}
                 <div className="d-flex align-items-center">
-                    <i className="bi bi-suit-heart fs-3 text-danger rounded-circle "
+                    <i className="bi bi-suit-heart fs-3 text-danger rounded-circle"
                         style={{
-                            backgroundColor: '#f8d7da', width: '40px', height: '40px',
-                            display: 'flex', justifyContent: 'center', alignItems: 'center'
+                            backgroundColor: '#f8d7da',
+                            width: '40px',
+                            height: '40px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
                         }}>
                     </i>
-                    <h1 className="p-2 h3 ">Mayra <span className="text-danger  h3">Quinteros</span></h1>
+                    <h1 className="p-2 h3">Mayra <span className="text-danger h3">Quinteros</span></h1>
                 </div>
-
 
                 {/* Botón del menú hamburguesa */}
                 <button
@@ -35,21 +38,21 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Inicio</Link>
+                            <a className="nav-link" href="#inicio">Inicio</a>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/servicios">Servicios</Link>
+                            <a className="nav-link" href="#servicios">Servicios</a>
                         </li>
+
                         <li className="nav-item">
-                            <Link className="nav-link" to="/contacto">Contacto</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/sobre-mi">Sobre mí</Link>
+                            <a className="nav-link" href="#sobremi">Sobre mí</a>
+                        </li> <li className="nav-item">
+                            <a className="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
 
                     {/* Botón de iniciar sesión */}
-                    <button className="btn btn-outline-secondary ms-3">Iniciar sesión</button>
+                    <Link to="/login" className="btn btn-outline-secondary ms-3">Iniciar sesión</Link>
                 </div>
             </div>
         </nav>

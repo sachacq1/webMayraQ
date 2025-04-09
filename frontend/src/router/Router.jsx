@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import App from "../App";
-import Header from "../components/header/header";
-import Footer from "../components/footer/footer";
 import { useAuth } from "../context/authContext";
 import PrivateRoutes from "../components/PrivateRoute";
 import PublicRoute from "../components/PublicRoute";
@@ -14,21 +12,18 @@ import Servicios from "../views/servicios/servicios.jsx";
 import SobreMi from "../views/sobreMi/sobreMi.jsx";
 import Contacto from "../views/contacto/contacto.jsx";
 import LayoutPublico from "../Layout/LayoutPublico.jsx";
+import Landing from "../Layout/Landing.jsx";
 
 const AppRouter = () => {
     return (
         <>
-            <Header />
 
             <Routes>
                 {/* Layout general para todas las páginas públicas */}
                 <Route element={<LayoutPublico />}>
-                    <Route path="/" element={<Inicio />} />
-                    <Route path="/inicio" element={<Inicio />} />
-                    <Route path="/servicios" element={<Servicios />} />
-                    <Route path="/sobremi" element={<SobreMi />} />
-                    <Route path="/contacto" element={<Contacto />} />
+                    <Route path="/" element={<Landing />} />
                 </Route>
+
 
                 {/* Rutas de autenticación */}
                 <Route
@@ -75,7 +70,6 @@ const AppRouter = () => {
                 />
             </Routes>
 
-            <Footer />
         </>
     );
 };

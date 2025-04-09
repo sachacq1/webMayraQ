@@ -39,7 +39,7 @@ const Contacto = () => {
 
 
                                 <li className="d-flex align-items-center">
-                                    <i class="bi bi-clock fs-1 text-danger me-3"></i>
+                                    <i className="bi bi-clock fs-1 text-danger me-3"></i>
                                     <div className='d-flex flex-column align-items-start'>
                                         <span className='fs-6'>Horario</span>
                                         <span className='fs-6'>Lun - Vie: 9:00 - 19:00</span>
