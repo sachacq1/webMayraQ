@@ -15,7 +15,6 @@ const App = () => {
         <h1>Bienvenido al Panel Privado</h1>
         <p>Acá iría tu dashboard o lo que quieras que solo vea la psicóloga.</p>
       </div>
-      <AdminPacientesList />
     </>
   );
 };
