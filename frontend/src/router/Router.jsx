@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import App from "../App";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
@@ -5,7 +6,6 @@ import { useAuth } from "../context/authContext";
 import PrivateRoutes from "../components/PrivateRoute";
 import PublicRoute from "../components/PublicRoute";
 import { PacienteDetalle } from "../views/pacientes/pacientes";
-import { Routes, Route } from "react-router-dom";
 import PacienteEditar from "../views/pacientes/pacienteEditar.jsx";
 import Login from "../views/login/login.jsx";
 import Register from "../views/register/register.jsx";
@@ -14,22 +14,20 @@ import Servicios from "../views/servicios/servicios.jsx";
 import SobreMi from "../views/sobreMi/sobreMi.jsx";
 import Contacto from "../views/contacto/contacto.jsx";
 
-
 const AppRouter = () => {
-    const { authToken } = useAuth();
-
     return (
         <>
-            {authToken && <Header />}
+            <Header />
+
             <Routes>
-                {/* Páginas públicas siempre accesibles */}
+                {/* Rutas públicas accesibles siempre */}
                 <Route path="/" element={<Inicio />} />
                 <Route path="/inicio" element={<Inicio />} />
                 <Route path="/servicios" element={<Servicios />} />
                 <Route path="/sobremi" element={<SobreMi />} />
                 <Route path="/contacto" element={<Contacto />} />
 
-                {/* Auth */}
+                {/* Rutas de autenticación */}
                 <Route
                     path="/login"
                     element={
@@ -47,7 +45,7 @@ const AppRouter = () => {
                     }
                 />
 
-                {/* Rutas privadas */}
+                {/* Rutas privadas solo para usuarios logueados */}
                 <Route
                     path="/pacientes/:id"
                     element={
@@ -74,9 +72,8 @@ const AppRouter = () => {
                 />
             </Routes>
 
-            {authToken && <Footer />}
+            <Footer />
         </>
-
     );
 };
 
