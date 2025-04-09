@@ -45,7 +45,7 @@ const Header = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                {/* Menú */}
+                {/* Menú colapsable */}
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
@@ -61,11 +61,12 @@ const Header = () => {
                             <a className="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
+                </div>
 
-
-                    {/* Botón o dropdown según login */}
+                {/* Panel o Login siempre visible */}
+                <div className="ms-3 d-flex">
                     {isAuthenticated ? (
-                        <div className="dropdown ms-3">
+                        <div className="dropdown">
                             <button
                                 className="btn btn-outline-secondary dropdown-toggle"
                                 type="button"
@@ -94,13 +95,14 @@ const Header = () => {
                             </ul>
                         </div>
                     ) : (
-                        <Link to="/login" className="btn btn-outline-secondary ms-3">
+                        <Link to="/login" className="btn btn-outline-secondary">
                             Iniciar sesión
                         </Link>
                     )}
-                </div>
+                </div> {/* <-- Acá lo movimos */}
             </div>
         </nav>
+
     );
 };
 
