@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     getAllPacientes,
     addPaciente,
@@ -12,12 +12,12 @@ const AdminPacientesList = () => {
     const [formData, setFormData] = useState({
         _id: "",
         nombre: "",
-        apellido: "", // corregido "Apellido"
+        apellido: "",
         dni: "",
         email: "",
         telefono: "",
         fechaNacimiento: "",
-        info: "", // NUEVO CAMPO
+        info: "",
     });
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
@@ -75,7 +75,7 @@ const AdminPacientesList = () => {
             email: "",
             telefono: "",
             fechaNacimiento: "",
-            info: "", // RESET también
+            info: "",
         });
         setIsEditing(false);
     };
@@ -89,14 +89,11 @@ const AdminPacientesList = () => {
                     <div key={paciente._id} className="column is-4">
                         <div className="card">
                             <div className="card-content">
-                                <h3 className="title is-5">{paciente.nombre} {paciente.apellido}</h3>
-                                <p><strong>DNI:</strong> {paciente.dni}</p>
-                                <p><strong>Email:</strong> {paciente.email}</p>
-                                <p><strong>Teléfono:</strong> {paciente.telefono}</p>
-                                <p><strong>Fecha de Nacimiento:</strong> {paciente.fechaNacimiento}</p>
-                                {paciente.info && (
-                                    <p><strong>Info:</strong> {paciente.info}</p>
-                                )}
+                                <h3 className="title is-5">
+                                    <Link to={`/paciente/${paciente._id}`} className="has-text-link">
+                                        {paciente.nombre} {paciente.apellido}
+                                    </Link>
+                                </h3>
                                 <div className="buttons is-right mt-3">
                                     <button className="button is-warning" onClick={() => handleEdit(paciente)}>Editar</button>
                                     <button className="button is-danger" onClick={() => handleDelete(paciente._id)}>Eliminar</button>

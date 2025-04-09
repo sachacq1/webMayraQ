@@ -13,6 +13,15 @@ const PacienteDetalle = () => {
         if (id) fetchPaciente(id);
     }, [id]);
 
+    const formatFecha = (fechaISO) => {
+        const fecha = new Date(fechaISO);
+        return fecha.toLocaleDateString("es-AR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        });
+    };
+
     const fetchPaciente = async (id) => {
         try {
             const data = await getPacienteById(id);
@@ -41,7 +50,7 @@ const PacienteDetalle = () => {
                     <li className="list-group-item"><strong>DNI:</strong> {paciente.dni}</li>
                     <li className="list-group-item"><strong>Email:</strong> {paciente.email}</li>
                     <li className="list-group-item"><strong>Teléfono:</strong> {paciente.telefono}</li>
-                    <li className="list-group-item"><strong>Fecha de Nacimiento:</strong> {paciente.fechaNacimiento}</li>
+                    <li className="list-group-item"><strong>Fecha de Nacimiento:</strong> {formatFecha(paciente.fechaNacimiento)}</li>
                 </ul>
 
                 {paciente.info && (
