@@ -68,7 +68,7 @@ const AppRouter = () => {
                     path="/panel"
                     element={
                         <PrivateRoutes>
-                            <App /> {/* solo si tu App es tipo panel privado */}
+                            <App />
                         </PrivateRoutes>
                     }
                 />
