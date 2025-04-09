@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Inicio from "../views/inicio/inicio";
 import Servicios from "../views/servicios/servicios";
 import SobreMi from "../views/sobreMi/sobreMi";
@@ -9,7 +9,7 @@ import Footer from "./components/footer/footer.jsx";
 const App = () => {
 
   return (
-    <Router>
+    <>
       <Header />
       <Routes>
         <Route path="/inicio" element={<Inicio />} />
@@ -20,7 +20,8 @@ const App = () => {
         <Route path="*" element={<h2>Página no encontrada</h2>} />
       </Routes>
       <Footer />
-    </Router>
+    </>
+
   );
 };
 

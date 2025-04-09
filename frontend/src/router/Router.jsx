@@ -5,7 +5,7 @@ import { useAuth } from "../context/authContext";
 import PrivateRoutes from "../components/PrivateRoute";
 import PublicRoute from "../components/PublicRoute";
 import { PacienteDetalle } from "../views/pacientes/pacientes";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PacienteEditar from "../views/pacientes/pacienteEditar";
 
 
