@@ -1,4 +1,4 @@
-import { getPacienteById } from "../services/apiPacientes.js";
+import { getPacienteById } from "../../services/apiPacientes.js";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
