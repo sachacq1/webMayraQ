@@ -7,13 +7,10 @@ import { PacienteDetalle } from "../views/pacientes/pacientes";
 import PacienteEditar from "../views/pacientes/pacienteEditar.jsx";
 import Login from "../views/login/login.jsx";
 import Register from "../views/register/register.jsx";
-import Inicio from "../views/inicio/inicio.jsx";
-import Servicios from "../views/servicios/servicios.jsx";
-import SobreMi from "../views/sobreMi/sobreMi.jsx";
-import Contacto from "../views/contacto/contacto.jsx";
 import LayoutPublico from "../Layout/LayoutPublico.jsx";
 import Landing from "../Layout/Landing.jsx";
 import Panel from "../views/panel/panel.jsx";
+import { AdminPacientesList } from "../views/Admin/dashboard.jsx";
 
 const AppRouter = () => {
     return (
