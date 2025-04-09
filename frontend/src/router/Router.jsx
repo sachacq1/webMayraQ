@@ -12,11 +12,12 @@ import Landing from "../Layout/Landing.jsx";
 import Panel from "../views/panel/panel.jsx";
 import AdminPacientesList from "../views/Admin/AdminPacientesList.jsx";
 import AdminPacientesAdd from "../views/Admin/AdminPacienteAdd.jsx";
+import Header from "../components/header/header.jsx";
 
 const AppRouter = () => {
     return (
         <>
-
+            <Header />
             <Routes>
                 {/* Layout general para todas las páginas públicas */}
                 <Route element={<LayoutPublico />}>
