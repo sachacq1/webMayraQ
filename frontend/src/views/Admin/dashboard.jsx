@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     getAllPacientes,
     addPaciente,
@@ -20,7 +20,6 @@ const AdminPacientesList = () => {
         info: "",
     });
     const [isEditing, setIsEditing] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchPacientes();
@@ -64,6 +63,7 @@ const AdminPacientesList = () => {
     const handleEdit = (paciente) => {
         setFormData(paciente);
         setIsEditing(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const resetForm = () => {
@@ -81,22 +81,23 @@ const AdminPacientesList = () => {
     };
 
     return (
-        <div className="container">
-            <h1 className="title is-3">Lista de Pacientes</h1>
+        <div className="container py-5">
+            <h1 className="text-center mb-5">Lista de Pacientes</h1>
 
-            <div className="columns is-multiline">
+            <div className="row g-4 mb-5">
                 {pacientes.map((paciente) => (
-                    <div key={paciente._id} className="column is-4">
-                        <div className="card">
-                            <div className="card-content">
-                                <h3 className="title is-5">
-                                    <Link to={`/pacientes/${paciente._id}`} className="has-text-link">
+                    <div key={paciente._id} className="col-md-4">
+                        <div className="card shadow-sm">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    <Link to={`/pacientes/${paciente._id}`} className="text-decoration-none text-primary">
                                         {paciente.nombre} {paciente.apellido}
                                     </Link>
-                                </h3>
-                                <div className="buttons is-right mt-3">
-                                    <button className="button is-warning" onClick={() => handleEdit(paciente)}>Editar</button>
-                                    <button className="button is-danger" onClick={() => handleDelete(paciente._id)}>Eliminar</button>
+                                </h5>
+                                <p className="card-text"><strong>DNI:</strong> {paciente.dni}</p>
+                                <div className="d-flex justify-content-end gap-2">
+                                    <button className="btn btn-warning btn-sm" onClick={() => handleEdit(paciente)}>Editar</button>
+                                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(paciente._id)}>Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -104,35 +105,46 @@ const AdminPacientesList = () => {
                 ))}
             </div>
 
-            <div className="box mt-6">
-                <h2 className="subtitle is-4">{isEditing ? "Actualizar Paciente" : "Agregar Nuevo Paciente"}</h2>
-                <form onSubmit={handleSubmit}>
-                    <label className="label">Nombre</label>
-                    <input className="input" type="text" value={formData.nombre} onChange={(e) => setFormData({ ...formData, nombre: e.target.value })} required />
-
-                    <label className="label">Apellido</label>
-                    <input className="input" type="text" value={formData.apellido} onChange={(e) => setFormData({ ...formData, apellido: e.target.value })} required />
-
-                    <label className="label">DNI</label>
-                    <input className="input" type="text" value={formData.dni} onChange={(e) => setFormData({ ...formData, dni: e.target.value })} required />
-
-                    <label className="label">Email</label>
-                    <input className="input" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
-
-                    <label className="label">Teléfono</label>
-                    <input className="input" type="text" value={formData.telefono} onChange={(e) => setFormData({ ...formData, telefono: e.target.value })} required />
-
-                    <label className="label">Fecha de Nacimiento</label>
-                    <input className="input" type="date" value={formData.fechaNacimiento} onChange={(e) => setFormData({ ...formData, fechaNacimiento: e.target.value })} required />
-
-                    <label className="label">Información adicional</label>
-                    <textarea className="textarea" value={formData.info} onChange={(e) => setFormData({ ...formData, info: e.target.value })} placeholder="Antecedentes, observaciones, etc."></textarea>
-
-                    <div className="buttons mt-4">
-                        <button className="button is-primary" type="submit">{isEditing ? "Actualizar Paciente" : "Guardar Paciente"}</button>
-                        <button className="button is-light" type="button" onClick={resetForm}>Cancelar</button>
-                    </div>
-                </form>
+            <div className="card shadow">
+                <div className="card-body">
+                    <h2 className="card-title mb-4">{isEditing ? "Actualizar Paciente" : "Agregar Nuevo Paciente"}</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="row g-3">
+                            <div className="col-md-6">
+                                <label className="form-label">Nombre</label>
+                                <input type="text" className="form-control" value={formData.nombre} onChange={(e) => setFormData({ ...formData, nombre: e.target.value })} required />
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label">Apellido</label>
+                                <input type="text" className="form-control" value={formData.apellido} onChange={(e) => setFormData({ ...formData, apellido: e.target.value })} required />
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label">DNI</label>
+                                <input type="text" className="form-control" value={formData.dni} onChange={(e) => setFormData({ ...formData, dni: e.target.value })} required />
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label">Email</label>
+                                <input type="email" className="form-control" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label">Teléfono</label>
+                                <input type="text" className="form-control" value={formData.telefono} onChange={(e) => setFormData({ ...formData, telefono: e.target.value })} required />
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label">Fecha de Nacimiento</label>
+                                <input type="date" className="form-control" value={formData.fechaNacimiento} onChange={(e) => setFormData({ ...formData, fechaNacimiento: e.target.value })} required />
+                            </div>
+                            <div className="col-12">
+                                <label className="form-label">Información adicional</label>
+                                <textarea className="form-control" rows="3" value={formData.info} onChange={(e) => setFormData({ ...formData, info: e.target.value })} placeholder="Antecedentes, observaciones, etc."></textarea>
+                            </div>
+                        </div>
+                        <div className="mt-4 d-flex gap-2">
+                            <button type="submit" className="btn btn-primary">{isEditing ? "Actualizar" : "Guardar"}</button>
+                            <button type="button" className="btn btn-secondary" onClick={resetForm}>Cancelar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
