@@ -89,4 +89,4 @@ const PacienteEditar = () => {
     );
 };
 
-export { PacienteEditar };
+export default PacienteEditar 
