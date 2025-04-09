@@ -22,6 +22,14 @@ const AppRouter = () => {
         <>
             {authToken && <Header />}
             <Routes>
+                {/* Páginas públicas siempre accesibles */}
+                <Route path="/" element={<Inicio />} />
+                <Route path="/inicio" element={<Inicio />} />
+                <Route path="/servicios" element={<Servicios />} />
+                <Route path="/sobremi" element={<SobreMi />} />
+                <Route path="/contacto" element={<Contacto />} />
+
+                {/* Auth */}
                 <Route
                     path="/login"
                     element={
@@ -38,14 +46,8 @@ const AppRouter = () => {
                         </PublicRoute>
                     }
                 />
-                <Route
-                    path="/"
-                    element={
-                        <PrivateRoutes>
-                            <App />
-                        </PrivateRoutes>
-                    }
-                />
+
+                {/* Rutas privadas */}
                 <Route
                     path="/pacientes/:id"
                     element={
@@ -62,12 +64,16 @@ const AppRouter = () => {
                         </PrivateRoutes>
                     }
                 />
-
-                <Route path="/inicio" element={<Inicio />} />
-                <Route path="/servicios" element={<Servicios />} />
-                <Route path="/sobremi" element={<SobreMi />} />
-                <Route path="/contacto" element={<Contacto />} />
+                <Route
+                    path="/panel"
+                    element={
+                        <PrivateRoutes>
+                            <App /> {/* solo si tu App es tipo panel privado */}
+                        </PrivateRoutes>
+                    }
+                />
             </Routes>
+
             {authToken && <Footer />}
         </>
 
