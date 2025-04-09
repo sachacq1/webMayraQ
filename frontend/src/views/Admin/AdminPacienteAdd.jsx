@@ -25,7 +25,7 @@ const AdminPacientesAdd = () => {
     };
 
     return (
-        <div className="container py-5">
+        <div className="container pt-5 mt-5">
             <h2 className="mb-4">Agregar Nuevo Paciente</h2>
             <form onSubmit={handleSubmit}>
                 <div className="row g-3">

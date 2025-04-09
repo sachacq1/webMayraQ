@@ -31,7 +31,7 @@ const AdminPacientesList = () => {
     };
 
     return (
-        <div className="container py-5">
+        <div className="container pt-5 mt-5">
             <h1 className="text-center mb-4">Lista de Pacientes</h1>
             <div className="mb-4 text-end">
                 <button onClick={() => navigate("/panel/agregar")} className="btn btn-success">
