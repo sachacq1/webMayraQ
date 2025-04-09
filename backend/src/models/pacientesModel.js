@@ -41,7 +41,7 @@ const Paciente = mongoose.model("Paciente", PacienteSchema);
 // CRUD
 
 // Obtener todos los pacientes
-export const getAllPacientes = async (req, res) => {
+export const getAllPacientes = async () => {
     try {
         const pacientes = await Paciente.find();
         res.json(pacientes);
