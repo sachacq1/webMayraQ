@@ -90,7 +90,7 @@ const AdminPacientesList = () => {
                         <div className="card">
                             <div className="card-content">
                                 <h3 className="title is-5">
-                                    <Link to={`/paciente/${paciente._id}`} className="has-text-link">
+                                    <Link to={`/pacientes/${paciente._id}`} className="has-text-link">
                                         {paciente.nombre} {paciente.apellido}
                                     </Link>
                                 </h3>
