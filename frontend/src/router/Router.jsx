@@ -91,7 +91,7 @@ const AppRouter = () => {
                     path="/panel/agregar"
                     element={
                         <PrivateRoutes>
-                            <AdminPacientesList />  // Podés hacer un componente separado si querés solo el formulario
+                            <AdminPacientesList />
                         </PrivateRoutes>
                     }
                 />
