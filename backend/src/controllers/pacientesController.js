@@ -21,7 +21,8 @@ const addPaciente = async (req, res) => {
         res.status(201).json(newPaciente);
     } catch (error) {
         res.status(500).json({ error: "Error al agregar el paciente" });
-        console.log(error)
+        console.error("Error al agregar el paciente:", error);
+
     }
 };
 

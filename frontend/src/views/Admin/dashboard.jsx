@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllPacientes, addPaciente, updatePaciente, deletePaciente } from "../../services/apiPacientes.js";
+import {
+    getAllPacientes,
+    addPaciente,
+    updatePaciente,
+    deletePaciente
+} from "../../services/apiPacientes.js";
 
 const AdminPacientesList = () => {
     const [pacientes, setPacientes] = useState([]);
     const [formData, setFormData] = useState({
         _id: "",
         nombre: "",
-        Apellido: "",
+        apellido: "", // corregido "Apellido"
         dni: "",
         email: "",
         telefono: "",
         fechaNacimiento: "",
+        info: "", // NUEVO CAMPO
     });
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
@@ -64,11 +70,12 @@ const AdminPacientesList = () => {
         setFormData({
             _id: "",
             nombre: "",
-            Apellido: "",
+            apellido: "",
             dni: "",
             email: "",
             telefono: "",
             fechaNacimiento: "",
+            info: "", // RESET también
         });
         setIsEditing(false);
     };
@@ -82,12 +89,15 @@ const AdminPacientesList = () => {
                     <div key={paciente._id} className="column is-4">
                         <div className="card">
                             <div className="card-content">
-                                <h3 className="title is-5">{paciente.nombre} {paciente.Apellido}</h3>
+                                <h3 className="title is-5">{paciente.nombre} {paciente.apellido}</h3>
                                 <p><strong>DNI:</strong> {paciente.dni}</p>
                                 <p><strong>Email:</strong> {paciente.email}</p>
                                 <p><strong>Teléfono:</strong> {paciente.telefono}</p>
                                 <p><strong>Fecha de Nacimiento:</strong> {paciente.fechaNacimiento}</p>
-                                <div className="buttons is-right">
+                                {paciente.info && (
+                                    <p><strong>Info:</strong> {paciente.info}</p>
+                                )}
+                                <div className="buttons is-right mt-3">
                                     <button className="button is-warning" onClick={() => handleEdit(paciente)}>Editar</button>
                                     <button className="button is-danger" onClick={() => handleDelete(paciente._id)}>Eliminar</button>
                                 </div>
@@ -97,14 +107,14 @@ const AdminPacientesList = () => {
                 ))}
             </div>
 
-            <div className="box">
+            <div className="box mt-6">
                 <h2 className="subtitle is-4">{isEditing ? "Actualizar Paciente" : "Agregar Nuevo Paciente"}</h2>
                 <form onSubmit={handleSubmit}>
                     <label className="label">Nombre</label>
                     <input className="input" type="text" value={formData.nombre} onChange={(e) => setFormData({ ...formData, nombre: e.target.value })} required />
 
                     <label className="label">Apellido</label>
-                    <input className="input" type="text" value={formData.Apellido} onChange={(e) => setFormData({ ...formData, Apellido: e.target.value })} required />
+                    <input className="input" type="text" value={formData.apellido} onChange={(e) => setFormData({ ...formData, apellido: e.target.value })} required />
 
                     <label className="label">DNI</label>
                     <input className="input" type="text" value={formData.dni} onChange={(e) => setFormData({ ...formData, dni: e.target.value })} required />
@@ -117,6 +127,9 @@ const AdminPacientesList = () => {
 
                     <label className="label">Fecha de Nacimiento</label>
                     <input className="input" type="date" value={formData.fechaNacimiento} onChange={(e) => setFormData({ ...formData, fechaNacimiento: e.target.value })} required />
+
+                    <label className="label">Información adicional</label>
+                    <textarea className="textarea" value={formData.info} onChange={(e) => setFormData({ ...formData, info: e.target.value })} placeholder="Antecedentes, observaciones, etc."></textarea>
 
                     <div className="buttons mt-4">
                         <button className="button is-primary" type="submit">{isEditing ? "Actualizar Paciente" : "Guardar Paciente"}</button>

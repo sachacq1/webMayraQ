@@ -44,10 +44,10 @@ const PacienteDetalle = () => {
                     <li className="list-group-item"><strong>Fecha de Nacimiento:</strong> {paciente.fechaNacimiento}</li>
                 </ul>
 
-                {paciente.notas && (
+                {paciente.info && (
                     <div className="mt-4">
-                        <h5 className="fw-bold">Notas</h5>
-                        <p>{paciente.notas}</p>
+                        <h5 className="fw-bold">Información Adicional</h5>
+                        <p>{paciente.info}</p>
                     </div>
                 )}
             </div>
