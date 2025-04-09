@@ -4,7 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Header = () => {
-    const { isAuthenticated, logout } = useAuth();
+    const { authToken, user, logout } = useAuth();
+    const isAuthenticated = !!authToken;
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
