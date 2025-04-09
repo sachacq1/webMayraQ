@@ -11,6 +11,7 @@ import { useAuth } from "../context/authContext";
 import PrivateRoutes from "../components/PrivateRoute";
 import PublicRoute from "../components/PublicRoute";
 import { PacienteDetalle } from "../views/pacientes/pacientes";
+import { Route, Routes } from "react-router-dom";
 
 
 const AppRouter = () => {
