@@ -6,6 +6,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(localStorage.getItem("token") || null);
     const [role, setRole] = useState(localStorage.getItem("role") || null); // Guardar el rol en el estado
+    const [user, setUser] = useState(localStorage.getItem("user") || null);
+
 
     const checkTokenExpiration = (token) => {
         try {
@@ -32,24 +34,34 @@ export const AuthProvider = ({ children }) => {
 
     const login = (token) => {
         localStorage.setItem("token", token);
-        // Decodificamos el token y extraemos el rol
+
         const decoded = jwtDecode(token);
+
         setAuthToken(token);
-        setRole(decoded.role);  // Asignamos el rol del token al estado
-        localStorage.setItem("role", decoded.role); // Guardamos el rol en localStorage
+        setRole(decoded.role);
+        setUser(decoded.name); // 👈 suponiendo que el token tiene un "name"
+
+        localStorage.setItem("role", decoded.role);
+        localStorage.setItem("user", decoded.name); // también en localStorage
     };
+
 
     const logout = () => {
         localStorage.removeItem("token");
-        localStorage.removeItem("role"); // Limpiamos el rol también
+        localStorage.removeItem("role");
+        localStorage.removeItem("user");
+
         setAuthToken(null);
-        setRole(null); // Limpiamos el rol en el estado
+        setRole(null);
+        setUser(null);
     };
 
+
     return (
-        <AuthContext.Provider value={{ authToken, role, login, logout }}>
+        <AuthContext.Provider value={{ authToken, role, user, login, logout, isAuthenticated: !!authToken, }}>
             {children}
         </AuthContext.Provider>
+
     );
 };
 

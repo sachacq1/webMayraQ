@@ -69,7 +69,8 @@ const Header = () => {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                Panel
+                                {user || "Panel"}
+
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li>
