@@ -9,20 +9,10 @@ import Footer from "./components/footer/footer.jsx";
 const App = () => {
 
   return (
-
-    <>
-      <Header />
-      <Routes>
-        <Route path="/inicio" element={<Inicio />} />
-        <Route path="/servicios" element={<Servicios />} />
-        <Route path="/sobreMi" element={<SobreMi />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/" element={<Inicio />} /> {/* Ruta por defecto */}
-        <Route path="*" element={<h2>Página no encontrada</h2>} />
-      </Routes>
-      <Footer />
-    </>
-
+    <div className="container mt-4">
+      <h1>Bienvenido al Panel Privado</h1>
+      <p>Acá iría tu dashboard o lo que quieras que solo vea la psicóloga.</p>
+    </div>
   );
 };
 
