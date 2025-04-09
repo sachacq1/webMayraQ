@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Inicio from "../views/inicio/inicio";
-import Servicios from "../views/servicios/servicios";
-import SobreMi from "../views/sobreMi/sobreMi";
-import Contacto from "../views/contacto/contacto";
+import Inicio from "./views/inicio/inicio.jsx";
+import Servicios from "./views/servicios/servicios.jsx";
+import SobreMi from "./views/sobreMi/sobreMi.jsx";
+import Contacto from "./views/contacto/contacto.jsx";
 import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
 
