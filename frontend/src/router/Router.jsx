@@ -13,6 +13,7 @@ import SobreMi from "../views/sobreMi/sobreMi.jsx";
 import Contacto from "../views/contacto/contacto.jsx";
 import LayoutPublico from "../Layout/LayoutPublico.jsx";
 import Landing from "../Layout/Landing.jsx";
+import Panel from "../views/panel/panel.jsx";
 
 const AppRouter = () => {
     return (
@@ -65,6 +66,15 @@ const AppRouter = () => {
                     element={
                         <PrivateRoutes>
                             <App />
+                        </PrivateRoutes>
+                    }
+                />
+
+                <Route
+                    path="/panel"
+                    element={
+                        <PrivateRoutes>
+                            <Panel />
                         </PrivateRoutes>
                     }
                 />
