@@ -10,7 +10,7 @@ import Register from "../views/register/register.jsx";
 import LayoutPublico from "../Layout/LayoutPublico.jsx";
 import Landing from "../Layout/Landing.jsx";
 import Panel from "../views/panel/panel.jsx";
-import AdminPacientesList from "../views/Admin/AdminPacientesList.jsxx";
+import AdminPacientesList from "../views/Admin/AdminPacientesList.jsx";
 import AdminPacientesAdd from "../views/Admin/AdminPacienteAdd.jsx";
 
 const AppRouter = () => {
