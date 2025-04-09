@@ -1,6 +1,6 @@
-import { getById } from "../../services/apiPacientes.js";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getById } from "../../services/apiPacientes.js";
 
 const PacienteDetalle = () => {
     const { id } = useParams();
