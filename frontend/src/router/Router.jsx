@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../views/login/login";
 import Register from "../views/register/register";
@@ -12,6 +11,7 @@ import Footer from "../components/footer/footer";
 import { useAuth } from "../context/authContext";
 import PrivateRoutes from "../components/PrivateRoute";
 import PublicRoute from "../components/PublicRoute";
+import { PacienteDetalle } from "../views/pacientes/pacientes";
 
 const AppRouter = () => {
     const { authToken } = useAuth();
@@ -41,6 +41,14 @@ const AppRouter = () => {
                     element={
                         <PrivateRoutes>
                             <App />
+                        </PrivateRoutes>
+                    }
+                />
+                <Route
+                    path="/pacientes/:id"
+                    element={
+                        <PrivateRoutes>
+                            <PacienteDetalle />
                         </PrivateRoutes>
                     }
                 />

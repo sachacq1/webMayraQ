@@ -1,4 +1,3 @@
-// App.jsx
 import { useAuth } from "./context/authContext.jsx";
 import { AdminPacientesList } from "./views/Admin/dashboard.jsx";
 
