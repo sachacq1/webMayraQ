@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Header = () => {
-    const { authToken, user, logout } = useAuth();
+    const { authToken, logout } = useAuth();
     const isAuthenticated = !!authToken;
 
     const navigate = useNavigate();
@@ -71,8 +71,7 @@ const Header = () => {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                {user || "Panel"}
-
+                                Panel
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li>
