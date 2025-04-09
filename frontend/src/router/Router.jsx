@@ -9,7 +9,10 @@ import { Routes, Route } from "react-router-dom";
 import PacienteEditar from "../views/pacientes/pacienteEditar.jsx";
 import Login from "../views/login/login.jsx";
 import Register from "../views/register/register.jsx";
-
+import Inicio from "../views/inicio/inicio.jsx";
+import Servicios from "../views/servicios/servicios.jsx";
+import SobreMi from "../views/sobreMi/sobreMi.jsx";
+import Contacto from "../views/contacto/contacto.jsx";
 
 
 const AppRouter = () => {
