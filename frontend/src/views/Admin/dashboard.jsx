@@ -102,10 +102,12 @@ const AdminPacientesList = () => {
                                 </h5>
                                 <p className="card-text"><strong>DNI:</strong> {paciente.dni}</p>
                                 <div className="d-flex justify-content-end gap-2">
-
-                                    <Link to={`/pacientes/editar/${paciente._id}`} className="btn btn-warning btn-sm me-2">
+                                    <button
+                                        className="btn btn-warning btn-sm"
+                                        onClick={() => navigate(`/pacientes/editar/${paciente._id}`)}
+                                    >
                                         Editar
-                                    </Link>
+                                    </button>
 
 
                                     <button className="btn btn-danger btn-sm" onClick={() => handleDelete(paciente._id)}>Eliminar</button>
