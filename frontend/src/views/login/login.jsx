@@ -16,7 +16,7 @@ const Login = () => {
             const response = await loginUser(username, password);
             if (response.token) {
                 login(response.token);
-                navigate("/panel"); // ir al panel privado si querés
+                navigate("/panel");
             } else {
                 alert("El login falló. Intenta de nuevo.");
             }

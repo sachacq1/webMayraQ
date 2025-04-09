@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Header = () => {
+    const { isAuthenticated, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div className="container">
@@ -21,7 +30,7 @@ const Header = () => {
                     <h1 className="p-2 h3">Mayra <span className="text-danger h3">Quinteros</span></h1>
                 </div>
 
-                {/* Botón del menú hamburguesa */}
+                {/* Botón hamburguesa */}
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -43,16 +52,49 @@ const Header = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="#servicios">Servicios</a>
                         </li>
-
                         <li className="nav-item">
                             <a className="nav-link" href="#sobremi">Sobre mí</a>
-                        </li> <li className="nav-item">
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
 
-                    {/* Botón de iniciar sesión */}
-                    <Link to="/login" className="btn btn-outline-secondary ms-3">Iniciar sesión</Link>
+                    {/* Botón o dropdown según login */}
+                    {isAuthenticated ? (
+                        <div className="dropdown ms-3">
+                            <button
+                                className="btn btn-outline-secondary dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Panel
+                            </button>
+                            <ul className="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <Link className="dropdown-item" to="/panel/lista">
+                                        Lista de pacientes
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link className="dropdown-item" to="/panel/agregar">
+                                        Agregar paciente
+                                    </Link>
+                                </li>
+                                <li><hr className="dropdown-divider" /></li>
+                                <li>
+                                    <button className="dropdown-item text-danger" onClick={handleLogout}>
+                                        Cerrar sesión
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <Link to="/login" className="btn btn-outline-secondary ms-3">
+                            Iniciar sesión
+                        </Link>
+                    )}
                 </div>
             </div>
         </nav>
