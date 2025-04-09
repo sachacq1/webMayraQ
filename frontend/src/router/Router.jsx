@@ -10,7 +10,8 @@ import Register from "../views/register/register.jsx";
 import LayoutPublico from "../Layout/LayoutPublico.jsx";
 import Landing from "../Layout/Landing.jsx";
 import Panel from "../views/panel/panel.jsx";
-import { AdminPacientesList } from "../views/Admin/dashboard.jsx";
+import AdminPacientesList from "../views/Admin/AdminPacientesList.jsxx";
+import AdminPacientesAdd from "../views/Admin/AdminPacienteAdd.jsx";
 
 const AppRouter = () => {
     return (
@@ -88,7 +89,7 @@ const AppRouter = () => {
                     path="/panel/agregar"
                     element={
                         <PrivateRoutes>
-                            <AdminPacientesList />
+                            <AdminPacientesAdd />
                         </PrivateRoutes>
                     }
                 />
