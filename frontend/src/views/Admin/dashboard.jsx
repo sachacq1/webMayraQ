@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useNavigate } from "react";
 import { Link } from "react-router-dom";
 import {
     getAllPacientes,
@@ -6,6 +6,8 @@ import {
     updatePaciente,
     deletePaciente
 } from "../../services/apiPacientes.js";
+
+const navigate = useNavigate();
 
 const AdminPacientesList = () => {
     const [pacientes, setPacientes] = useState([]);
@@ -102,12 +104,15 @@ const AdminPacientesList = () => {
                                 </h5>
                                 <p className="card-text"><strong>DNI:</strong> {paciente.dni}</p>
                                 <div className="d-flex justify-content-end gap-2">
+
                                     <button
-                                        className="btn btn-warning btn-sm"
                                         onClick={() => navigate(`/pacientes/editar/${paciente._id}`)}
+                                        className="btn btn-warning btn-sm"
                                     >
+                                        <i className="bi bi-pencil-square me-1"></i>
                                         Editar
                                     </button>
+
 
 
                                     <button className="btn btn-danger btn-sm" onClick={() => handleDelete(paciente._id)}>Eliminar</button>
