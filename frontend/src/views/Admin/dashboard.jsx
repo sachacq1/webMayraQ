@@ -61,10 +61,16 @@ const AdminPacientesList = () => {
     };
 
     const handleEdit = (paciente) => {
-        setFormData(paciente);
+        const fecha = paciente.fechaNacimiento?.substring(0, 10); // formato yyyy-mm-dd
+
+        setFormData({
+            ...paciente,
+            fechaNacimiento: fecha || "", // asegurate que esté bien formateada
+        });
+
         setIsEditing(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
 
     const resetForm = () => {
         setFormData({
