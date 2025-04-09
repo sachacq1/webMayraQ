@@ -12,6 +12,7 @@ import PrivateRoutes from "../components/PrivateRoute";
 import PublicRoute from "../components/PublicRoute";
 import { PacienteDetalle } from "../views/pacientes/pacientes";
 import { Route, Routes } from "react-router-dom";
+import PacienteEditar from "../views/pacientes/pacienteEditar";
 
 
 const AppRouter = () => {
@@ -53,6 +54,15 @@ const AppRouter = () => {
                         </PrivateRoutes>
                     }
                 />
+                <Route
+                    path="/pacientes/editar/:id"
+                    element={
+                        <PrivateRoutes>
+                            <PacienteEditar />
+                        </PrivateRoutes>
+                    }
+                />
+
                 <Route path="/inicio" element={<Inicio />} />
                 <Route path="/servicios" element={<Servicios />} />
                 <Route path="/sobremi" element={<SobreMi />} />
