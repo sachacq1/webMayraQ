@@ -5,14 +5,18 @@ import SobreMi from "./views/sobreMi/sobreMi.jsx";
 import Contacto from "./views/contacto/contacto.jsx";
 import Header from "./components/header/header.jsx";
 import Footer from "./components/footer/footer.jsx";
+import { AdminPacientesList } from "./views/Admin/dashboard.jsx";
 
 const App = () => {
 
   return (
-    <div className="container mt-4">
-      <h1>Bienvenido al Panel Privado</h1>
-      <p>Acá iría tu dashboard o lo que quieras que solo vea la psicóloga.</p>
-    </div>
+    <>
+      <div className="container mt-4">
+        <h1>Bienvenido al Panel Privado</h1>
+        <p>Acá iría tu dashboard o lo que quieras que solo vea la psicóloga.</p>
+      </div>
+      <AdminPacientesList />
+    </>
   );
 };
 

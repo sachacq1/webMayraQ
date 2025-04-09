@@ -7,9 +7,10 @@ import {
     deletePaciente
 } from "../../services/apiPacientes.js";
 
-const navigate = useNavigate();
+
 
 const AdminPacientesList = () => {
+    const navigate = useNavigate();
     const [pacientes, setPacientes] = useState([]);
     const [formData, setFormData] = useState({
         _id: "",
