@@ -12,97 +12,81 @@ const PacienteEditar = () => {
         email: "",
         telefono: "",
         fechaNacimiento: "",
-        info: ""
+        info: "",
     });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (id) fetchPaciente(id);
+        const fetchPaciente = async () => {
+            try {
+                const data = await getById(id);
+                setFormData({
+                    ...data,
+                    fechaNacimiento: new Date(data.fechaNacimiento).toISOString().split("T")[0],
+                });
+            } catch (error) {
+                console.error("Error al obtener paciente:", error);
+            }
+        };
+        fetchPaciente();
     }, [id]);
 
-    const fetchPaciente = async (id) => {
-        try {
-            const data = await getById(id);
-            setFormData({
-                ...data,
-                fechaNacimiento: data.fechaNacimiento?.split("T")[0] || ""
-            });
-            setLoading(false);
-        } catch (error) {
-            console.error("Error al obtener el paciente", error);
-            setError("Error al obtener el paciente.");
-            setLoading(false);
-        }
-    };
-
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await updatePaciente(id, formData);
-            alert("Paciente actualizado con éxito");
             navigate(`/pacientes/${id}`);
         } catch (error) {
-            alert("Error al actualizar el paciente");
-            console.error(error);
+            console.error("Error al actualizar paciente:", error);
         }
     };
 
-    if (loading) return <div className="text-center my-5">Cargando...</div>;
-    if (error) return <div className="text-center my-5 text-danger">{error}</div>;
-
     return (
         <div className="container py-5">
-            <h1 className="text-center mb-4">Editar Paciente</h1>
-
-            <form onSubmit={handleSubmit} className="card shadow p-4">
-                <div className="mb-3">
-                    <label className="form-label">Nombre</label>
-                    <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} className="form-control" required />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Apellido</label>
-                    <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} className="form-control" required />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">DNI</label>
-                    <input type="text" name="dni" value={formData.dni} onChange={handleChange} className="form-control" required />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Email</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="form-control" required />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Teléfono</label>
-                    <input type="text" name="telefono" value={formData.telefono} onChange={handleChange} className="form-control" required />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Fecha de Nacimiento</label>
-                    <input type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} className="form-control" required />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Información adicional</label>
-                    <textarea name="info" value={formData.info} onChange={handleChange} className="form-control" rows={4}></textarea>
-                </div>
-
-                <div className="d-flex justify-content-between">
-                    <button type="submit" className="btn btn-primary">Guardar Cambios</button>
-                    <button type="button" className="btn btn-secondary" onClick={() => navigate(`/pacientes/${id}`)}>Cancelar</button>
-                </div>
-            </form>
+            <div className="card shadow p-4">
+                <h2 className="text-center mb-4">Editar Paciente</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="row g-3">
+                        <div className="col-md-6">
+                            <label className="form-label">Nombre</label>
+                            <input type="text" className="form-control" name="nombre" value={formData.nombre} onChange={handleChange} required />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Apellido</label>
+                            <input type="text" className="form-control" name="apellido" value={formData.apellido} onChange={handleChange} required />
+                        </div>
+                        <div className="col-md-4">
+                            <label className="form-label">DNI</label>
+                            <input type="text" className="form-control" name="dni" value={formData.dni} onChange={handleChange} required />
+                        </div>
+                        <div className="col-md-4">
+                            <label className="form-label">Teléfono</label>
+                            <input type="text" className="form-control" name="telefono" value={formData.telefono} onChange={handleChange} />
+                        </div>
+                        <div className="col-md-4">
+                            <label className="form-label">Fecha de Nacimiento</label>
+                            <input type="date" className="form-control" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} required />
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Email</label>
+                            <input type="email" className="form-control" name="email" value={formData.email} onChange={handleChange} />
+                        </div>
+                        <div className="col-12">
+                            <label className="form-label">Información Adicional</label>
+                            <textarea className="form-control" rows="4" name="info" value={formData.info} onChange={handleChange} placeholder="Antecedentes, observaciones, etc."></textarea>
+                        </div>
+                    </div>
+                    <div className="text-center mt-4">
+                        <button type="submit" className="btn btn-success me-2">Guardar Cambios</button>
+                        <button type="button" className="btn btn-secondary" onClick={() => navigate(`/pacientes/${id}`)}>Cancelar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
 
-export default PacienteEditar;
+export { PacienteEditar };
