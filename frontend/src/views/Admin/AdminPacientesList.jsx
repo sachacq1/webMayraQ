@@ -34,7 +34,7 @@ const AdminPacientesList = () => {
         <div className="container py-5">
             <h1 className="text-center mb-4">Lista de Pacientes</h1>
             <div className="mb-4 text-end">
-                <button onClick={() => navigate("/pacientes/nuevo")} className="btn btn-success">
+                <button onClick={() => navigate("/panel/agregar")} className="btn btn-success">
                     + Agregar Paciente
                 </button>
             </div>
