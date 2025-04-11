@@ -26,7 +26,7 @@ const Landing = () => {
                     <Inicio />
                 </section>
                 <section id="servicios" >
-                    <hServicios />
+                    <Servicios />
                 </section>
                 <section id="sobremi" >
                     <SobreMi />
