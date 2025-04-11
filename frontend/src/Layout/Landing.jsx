@@ -22,17 +22,17 @@ const Landing = () => {
     return (
         <>
             <div style={{ marginTop: "80px" }}>
-                <section id="inicio" style={{ height: "100vh", background: "#eee" }}>
-                    <h2>Inicio</h2>
+                <section id="inicio" >
+                    <Inicio />
                 </section>
-                <section id="servicios" style={{ height: "100vh", background: "#ccc" }}>
-                    <h2>Servicios</h2>
+                <section id="servicios" >
+                    <hServicios />
                 </section>
-                <section id="sobremi" style={{ height: "100vh", background: "#aaa" }}>
-                    <h2>Sobre mí</h2>
+                <section id="sobremi" >
+                    <SobreMi />
                 </section>
-                <section id="contacto" style={{ height: "100vh", background: "#888" }}>
-                    <h2>Contacto</h2>
+                <section id="contacto" >
+                    <Contacto />
                 </section>
             </div>
 
