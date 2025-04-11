@@ -1,17 +1,25 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext.jsx";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Header = () => {
     const { authToken, logout } = useAuth();
     const isAuthenticated = !!authToken;
-
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isHome = location.pathname === "/";
 
     const handleLogout = () => {
         logout();
         navigate("/");
+    };
+
+    const renderNavItem = (label, anchor) => {
+        return isHome ? (
+            <a className="nav-link" href={`#${anchor}`}>{label}</a>
+        ) : (
+            <Link className="nav-link" to={`/#${anchor}`}>{label}</Link>
+        );
     };
 
     return (
@@ -32,38 +40,27 @@ const Header = () => {
                     <h1 className="p-2 h3">Mayra <span className="text-danger h3">Quinteros</span></h1>
                 </div>
 
-                {/* Botón hamburguesa */}
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                {/* Menú colapsable */}
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="#Inicio">Inicio</a>
+                            {renderNavItem("Inicio", "inicio")}
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#servicios">Servicios</a>
+                            {renderNavItem("Servicios", "servicios")}
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#sobremi">Sobre mí</a>
+                            {renderNavItem("Sobre mí", "sobremi")}
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#contacto">Contacto</a>
+                            {renderNavItem("Contacto", "contacto")}
                         </li>
                     </ul>
                 </div>
 
-                {/* Panel o Login siempre visible */}
                 <div className="ms-3 d-flex">
                     {isAuthenticated ? (
                         <div className="dropdown">
@@ -71,20 +68,15 @@ const Header = () => {
                                 className="btn btn-outline-secondary dropdown-toggle"
                                 type="button"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
                             >
                                 Panel
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <Link className="dropdown-item" to="/panel/lista">
-                                        Lista de pacientes
-                                    </Link>
+                                    <Link className="dropdown-item" to="/panel/lista">Lista de pacientes</Link>
                                 </li>
                                 <li>
-                                    <Link className="dropdown-item" to="/panel/agregar">
-                                        Agregar paciente
-                                    </Link>
+                                    <Link className="dropdown-item" to="/panel/agregar">Agregar paciente</Link>
                                 </li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li>
@@ -99,10 +91,9 @@ const Header = () => {
                             Iniciar sesión
                         </Link>
                     )}
-                </div> {/* <-- Acá lo movimos */}
+                </div>
             </div>
         </nav>
-
     );
 };
 
