@@ -49,7 +49,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/panel">Inicio</Link>
+                            <a className="nav-link" href="#Inicio">Inicio</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#servicios">Servicios</a>
