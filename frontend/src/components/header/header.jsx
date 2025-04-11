@@ -22,6 +22,19 @@ const Header = () => {
         );
     };
 
+    // Navegar a landing y scrollear al ID
+    const handleAnchorClick = (e, id) => {
+        e.preventDefault();
+        if (location.pathname !== "/") {
+            navigate(`/#${id}`);
+        } else {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div className="container">
